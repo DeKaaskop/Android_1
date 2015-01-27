@@ -1,0 +1,120 @@
+package com.blogger_inholland.task;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+
+import android.graphics.Bitmap;
+import android.os.AsyncTask;
+import android.util.Log;
+
+import com.blogger_inholland.config.BlogConstants;
+import com.blogger_inholland.interfaces.AsyncResponse;
+import com.blogger_inholland.response.BlogResponse;
+import com.google.gson.Gson;
+
+public class PostBlogAsyncTask extends AsyncTask<Object, Void, Integer> {
+
+	// FIELDS
+	private final static String CHARSET = "UTF-8";
+	private final static String BOUNDARY = "12342398523458AAABBDD";
+	private final static String CRLF = "\r\n";
+
+	private BlogResponse br;
+//	public AsyncResponse delegate = null;
+
+	// METHODS
+	@Override
+	protected Integer doInBackground(Object... params) {
+		String title = (String) params[0];
+		String content = (String) params[1];
+		String udid = (String) params[2];
+		Bitmap image = (Bitmap) params[3];
+		
+		Gson gson = new Gson();
+		try {
+			URL url = new URL(BlogConstants.API_URL + "postblog");
+
+			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+			
+			connection.setDoOutput(true); // Triggers POST.
+			connection.setRequestProperty("Accept-Charset", CHARSET);
+			connection.setRequestProperty("Content-Type",
+					"multipart/form-data; boundary=" + BOUNDARY);
+			OutputStream output = null;
+			PrintWriter writer = null;
+
+			List<NameValuePair> nvp = new ArrayList<NameValuePair>();
+			nvp.add(new BasicNameValuePair("title", title));
+			nvp.add(new BasicNameValuePair("description", ""));
+			nvp.add(new BasicNameValuePair("content", content));
+			nvp.add(new BasicNameValuePair("udid", udid));
+			try {
+				output = connection.getOutputStream();
+				writer = new PrintWriter(
+						new OutputStreamWriter(output, CHARSET), true);
+
+				// write normal params
+				for (NameValuePair param : nvp) {
+					writer.append("--" + BOUNDARY).append(CRLF);
+					writer.append(
+							"Content-Disposition: form-data; name=\""
+									+ param.getName() + "\"").append(CRLF);
+					writer.append(
+							"Content-Type: text/plain; charset=" + CHARSET)
+							.append(CRLF);
+					writer.append(CRLF);
+					writer.append(param.getValue()).append(CRLF).flush();
+				}
+
+				// send binary file
+				writer.append("--" + BOUNDARY).append(CRLF);
+				writer.append(
+						"Content-Disposition: form-data; name=\"photo\"; filename=\"photo.png\"")
+						.append(CRLF);
+				writer.append("Content-Type: image/png").append(CRLF);
+				writer.append("Content-Transfer-Encoding: binary").append(CRLF);
+				writer.append(CRLF).flush();
+
+				image.compress(Bitmap.CompressFormat.PNG, 90, output);
+				output.flush(); // Important! Output cannot be closed. Close of
+								// writer will close output as well.
+				writer.append(CRLF).flush();
+				writer.append("--" + BOUNDARY).append(CRLF);
+			} catch (Exception e) {
+				Log.e("Upload", "Error", e);
+			} finally {
+				if (writer != null) {
+					writer.close();
+				}
+			}
+			InputStream is = new BufferedInputStream(connection.getInputStream());
+			BufferedReader reader = new BufferedReader(new InputStreamReader(is), 8 * 1024);
+			br = gson.fromJson(reader, BlogResponse.class);
+			Log.d("POST", "Reponse: " + br.responseObject);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return br.responseCode;
+	}
+
+//	protected void onPostExecute(Integer result) {
+//		delegate.processFinish(result);
+//	}
+}

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Blogger Inholland</string>
+    <string name="title_activity_main">Blogger App</string>
+
+    <!-- About Page -->
+    <string name="title_activity_about">About</string>
+    <string name="about_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer gravida, elit ac ornare faucibus, risus purus dictum metus, venenatis ornare leo odio ut lectus. Suspendisse facilisis lectus auctor tortor imperdiet pretium. Proin non mi est, sit amet scelerisque mauris. Proin nunc arcu, viverra a consequat at, commodo sed justo. Nullam dignissim fringilla tortor, id pulvinar odio hendrerit et. Phasellus est nisl, consequat et mattis sed, scelerisque id mi. Nullam laoreet orci eros. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Ut sit amet volutpat ligula. Aenean lacus tortor, feugiat eget interdum vel, auctor eu eros.
+								Morbi velit diam, lobortis ac aliquam ut, suscipit at ipsum. Morbi imperdiet auctor mauris suscipit mattis. Curabitur interdum diam vestibulum est scelerisque semper. Nullam adipiscing feugiat mauris ut luctus. Donec ut posuere augue. Nam a pellentesque lacus. Morbi tempus, leo et fringilla imperdiet, dolor nisl ultricies diam, et egestas est eros non augue. Duis nec tortor dolor. Integer quis ligula purus. Nulla facilisi. Sed quis est vitae ligula auctor ut non nisi. Pellentesque vitae felis ut lectus semper laoreet in sit amet enim. Cras blandit condimentum leo, vitae venenatis felis vestibulum quis. Nunc lacinia scelerisque luctus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Sed semper luctus magna ac imperdiet. Ut volutpat magna sed purus feugiat bibendum. Fusce quis ligula non tortor egestas scelerisque vitae quis nunc. Vestibulum pretium urna a neque ultrices condimentum. Morbi vitae libero lacus. Quisque mi ligula, vulputate ut ultrices vitae, ultrices quis mi. Sed lectus urna, euismod quis gravida nec, pharetra id tortor. Nam ultricies pulvinar magna non consectetur. Maecenas dignissim nulla porttitor dolor consequat molestie.</string>
+
+    <!-- Profile Page -->
+    <string name="title_activity_profile">Profile</string>
+    <string name="profile_username">Jan</string>
+    <string name="profile_description">Jan is de man!</string>
+    <string name="profile_image_contentdescription">Profile picture</string>
+
+    <!-- Profile Edit Page -->
+    <string name="title_activity_profile_edit">Profile Edit </string>
+    <string name="profile_edit_username">Username</string>
+    <string name="profile_edit_description">Description</string>
+    <string name="profile_edit_description_profilepicture">Your profilepicture</string>
+    <string name="profile_edit_save">Save</string>
+    
+    <!--  -->
+    <string name="title_activity_post">New Post </string>
+    <string name="post_edittext_title">Title!</string>
+    <string name="post_edittext_description">Description!</string>
+    <string name="btn_newpost_title">Post</string>
+    <string name="post_iv_contentdescription">Search picture from gallery</string>
+    <string name="title_activity_blogs">Posts</string>
+
+</resources>

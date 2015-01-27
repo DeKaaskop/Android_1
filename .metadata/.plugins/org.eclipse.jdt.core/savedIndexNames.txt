@@ -1,0 +1,5 @@
+INDEX VERSION 1.126+/Users/Lok/Documents/Programming/Repositories/Inholland_Blogger_Applicatie/.metadata/.plugins/org.eclipse.jdt.core
+1311388888.index
+714080839.index
+3903576447.index
+1776999086.index
