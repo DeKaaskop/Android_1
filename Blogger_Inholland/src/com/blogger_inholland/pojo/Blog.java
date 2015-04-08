@@ -12,6 +12,7 @@ public class Blog implements Parcelable {
 	public String image;
 	public String udid;
 	public Long createdondate;
+	public String author;
 	
 
 	public Blog(Parcel in) {
@@ -32,6 +33,7 @@ public class Blog implements Parcelable {
 		dest.writeString(image);
 		dest.writeString(udid);
 		dest.writeLong(createdondate);
+		dest.writeString(author);
 	}
 	
 	public static final Parcelable.Creator<Blog> CREATOR = new Parcelable.Creator<Blog>() {
@@ -53,5 +55,6 @@ public class Blog implements Parcelable {
 		image = in.readString();
 		udid = in.readString();
 		createdondate = in.readLong();
+		author = in.readString();
 	}
 }
